@@ -3,6 +3,9 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {injected} from "../components/wallet/connectors"
 import {useWeb3React} from "@web3-react/core"
+import { Modal } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 export default function Home() {
 const {active,account,library,connector,activate,deactivate}  =  useWeb3React()
 
@@ -18,7 +21,7 @@ async function connect(){
 }
 async function disconnect(){
   try {
-    await deactivate(injected)
+    deactivate(injected)
   }
   catch(ex){
     console.log(ex)
@@ -41,60 +44,60 @@ async function disconnect(){
 
       <main className={styles.main}>
       <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">NiceFitTrip</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">NiceFitTrip</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <div className="collapse navbar-collapse" id="navbarScroll">
+            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" >
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Map</a>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Map</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Meeting
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <li><a class="dropdown-item" href="#">Where Am I?</a></li>
-                  <li><a class="dropdown-item" href="#">Where is current Meeting?</a></li>
-                  <li><hr class="dropdown-divider"/></li>
-                  <li><a class="dropdown-item" href="#">Current meet match.</a></li>
+                <ul clclassNameass="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                  <li><a className="dropdown-item" href="#">Where Am I?</a></li>
+                  <li><a className="dropdown-item" href="#">Where is current Meeting?</a></li>
+                  <li><hr className="dropdown-divider"/></li>
+                  <li><a className="dropdown-item" href="#">Current meet match.</a></li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Go to OpenSea Page.</a>
+              <li className="nav-item">
+                <a className="nav-link disabled">Go to OpenSea Page.</a>
               </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search"/>
-              <button class="btn btn-outline-success m-2" type="submit">Search</button>
+            <form className="d-flex">
+              <input className="form-control me-3" type="search" placeholder="Search" aria-label="Search"/>
+              <button className="btn btn-outline-success m-2" type="submit">Search</button>
             </form>
             <form>
-              <button type="button" onClick={connect} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button className="button" onClick={connect} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Connect to wallet
               </button>
             </form>
           </div>
         </div>
-      </nav><div class="title">
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Choose your wallet:</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </nav><div className="title">
+<div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLabel">Choose your wallet:</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div className="modal-body">
         {active? <span>Connected with <b>{account}</b></span> : <span>Not connected</span>}
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button onClick={disconnect}  type="button" class="btn btn-primary"></button>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button onClick={disconnect}  type="button" className="btn btn-primary"></button>
       </div>
     </div>
   </div>
