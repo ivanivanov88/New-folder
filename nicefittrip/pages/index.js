@@ -16,6 +16,15 @@ async function connect(){
   }
 
 }
+async function disconnect(){
+  try {
+    await deactivate(injected)
+  }
+  catch(ex){
+    console.log(ex)
+  }
+
+}
 
   return (
     <div className={styles.container}>
