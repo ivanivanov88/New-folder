@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import {Web3ReactProveder} from '@web3-react/core'
+import {Web3ReactProvider} from '@web3-react/core'
 import Web3 from 'web3'
 
 function getLibrary(provider){
@@ -8,10 +8,9 @@ function getLibrary(provider){
 
 function MyApp({ Component, pageProps }) {
   return (
-  <Web3ReactProveder getLibrary = {getLibrary}>
+  <Web3ReactProvider getLibrary = {getLibrary}>
   <Component {...pageProps} />
-  </Web3ReactProveder>
-  
+  </Web3ReactProvider>
   )
   }
 
