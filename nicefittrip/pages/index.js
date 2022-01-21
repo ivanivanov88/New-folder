@@ -3,6 +3,11 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {injected} from "../components/wallet/connectors"
 import {useWeb3React} from "@web3-react/core"
+import { Container } from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
+import { NavDropdown } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
+import { FormControl } from 'react-bootstrap'
 import { Modal } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { Navbar } from 'react-bootstrap'
@@ -43,48 +48,45 @@ async function disconnect(){
       </Head>
 
       <main className={styles.main}>
-      <body>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">NiceFitTrip</a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarScroll">
-            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" >
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Map</a>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Meeting
-                </a>
-                <ul clclassNameass="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <li><a className="dropdown-item" href="#">Where Am I?</a></li>
-                  <li><a className="dropdown-item" href="#">Where is current Meeting?</a></li>
-                  <li><hr className="dropdown-divider"/></li>
-                  <li><a className="dropdown-item" href="#">Current meet match.</a></li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled">Go to OpenSea Page.</a>
-              </li>
-            </ul>
-            <form className="d-flex">
-              <input className="form-control me-3" type="search" placeholder="Search" aria-label="Search"/>
-              <button className="btn btn-outline-success m-2" type="submit">Search</button>
-            </form>
-            <form>
-              <button className="button" onClick={connect} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <Navbar bg="light" expand="lg">
+  <Container fluid>
+    <Navbar.Brand href="#">NiceFitTrip</Navbar.Brand>
+    <Navbar.Toggle aria-controls="navbarScroll" />
+    <Navbar.Collapse id="navbarScroll">
+      <Nav
+        className="me-auto my-2 my-lg-0"
+        style={{ maxHeight: '100px' }}
+        navbarScroll
+      >
+        <Nav.Link href="#action1">Home</Nav.Link>
+        <Nav.Link href="#action2">Map</Nav.Link>
+        <NavDropdown title="Link" id="navbarScrollingDropdown">
+          <NavDropdown.Item href="#action3">Meeting</NavDropdown.Item>
+          <NavDropdown.Item href="#action4">Current meet match</NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item href="#action5">
+            Where is current match?
+          </NavDropdown.Item>
+        </NavDropdown>
+        <Nav.Link href="#" disabled>
+          Link
+        </Nav.Link>
+      </Nav>
+      <Form className="d-flex">
+        <FormControl
+          type="search"
+          placeholder="Search"
+          className="me-2"
+          aria-label="Search"
+        />
+        <Button variant="outline-success">Search</Button>
+        <Button className="button" onClick={connect} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Connect to wallet
-              </button>
-            </form>
-          </div>
-        </div>
-      </nav><div className="title">
+              </Button>
+      </Form>
+    </Navbar.Collapse>
+  </Container>
+</Navbar>
 <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
@@ -102,10 +104,8 @@ async function disconnect(){
     </div>
   </div>
 </div>
-
-      </div>   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  </body>
+
       </main>
     </div>
   )
