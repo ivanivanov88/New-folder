@@ -1,3 +1,4 @@
+
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -15,15 +16,27 @@ import React, { useEffect, useState } from "react";
 import { Row } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 import { Wallet } from './api/hello'
+// import Image from  '/next/image'
+// import walletconnect from  './public/design/wallet-connect.svg'
+// import metamask from  './public/design/metamask.png'
+// import lattice from  './public/design/lattice.jpg'
+// import coinbase from  './public/design/coinbase.jpg'
+// import formatic from  './public/design/fortmatic.jpg'
+// import potris from  './public/design/potris.jpg'
+// import torus from  './public/design/torus.png'
+// import bsc from  './public/design/bsc.jpg'
+// import clover from  './public/design/clover.svg'
+
+
 class WalletObject extends React.Component{
   constructor () {
     super();
     this.state = {
-      emps:[ new Wallet(1,'Metamask',''),new Wallet(2,'WalletConnect',''),new Wallet(3,'Keystone',''),new Wallet(4,'Lattice',''),new Wallet(5,'Coinbase Wallet',''),new Wallet(6,'Fortmatic',''),
-      new Wallet(7,'Portis',''),new Wallet(8,'Torus',''),new Wallet(9,'Binance',''),new Wallet(10,'Clover',''),]
+      emps:[ new Wallet(1,'Metamask','/metamask.png'),new Wallet(2,'WalletConnect','/wallet-connect.svg'),new Wallet(3,'Keystone','/keystone.png'),new Wallet(4,'Lattice','/lattice.png'),new Wallet(5,'Coinbase Wallet','/coinbase.svg'),new Wallet(6,'Fortmatic','/fortmatic.png'),
+      new Wallet(7,'Portis','/potris.png'),new Wallet(8,'Torus','/torus.png'),new Wallet(9,'Binance','/bsc.jpg'),new Wallet(10,'Clover','/clover.svg'),]
     }
   }
-  render(){const listItems = this.state.emps.map((item) => <li key={item.id}>{item.name}</li>);
+  render(){const listItems = this.state.emps.map((item) => <Button key={item.id}><img src={item.href} alt="wallet image"></img>{item.name}</Button>);
   return(  <ul>{listItems}</ul>)
 }
 }
@@ -50,7 +63,7 @@ function WalletNumberOfRows(numrows){
   for (var i = 0; i < numrows; i++){
     return(
     <Row>
-    <Col xs={12} md={8}>
+    <Col xs={12} md={6}>
      <WalletObject></WalletObject>
     </Col>
   </Row>
