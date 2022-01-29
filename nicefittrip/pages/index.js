@@ -16,6 +16,7 @@ import React, { useEffect, useState } from "react";
 import { Row } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 import { Wallet } from './api/hello'
+import {Table} from "react-bootstrap"
 // import Image from  '/next/image'
 // import walletconnect from  './public/design/wallet-connect.svg'
 // import metamask from  './public/design/metamask.png'
@@ -70,6 +71,32 @@ function WalletNumberOfRows(numrows){
     )
   } 
 }
+function nftTable(tableName,cols,numrows,randomness)
+{
+  let multipleRows =[];
+  for (let i = 0; i < numrows; i++){
+    let oneRow = (
+    <Row>
+    <Col xs={12} md={6}>
+     <WalletObject></WalletObject>
+    </Col>
+  </Row>
+    )
+  multipleRows.push({oneRow});
+  } 
+<Table striped bordered hover size ="sm">  
+<thead>
+  <tr>
+  <th>#</th>
+  <th>Avatar</th>
+  <th>Wallet Address</th>
+  </tr>
+</thead>
+<tbody> 
+{multipleRows}
+</tbody>
+  </Table>
+}
 function MydModalWithGrid(props) {
   return ( 
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
@@ -117,7 +144,7 @@ function App() {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
     <title>NiceFitTrip</title>
       </Head>
-        <main className={styles.main}>
+        <main>
           <Navbar bg="light" expand="lg">
             <Container fluid>
               <Navbar.Brand href="#">NiceFitTrip</Navbar.Brand>
@@ -149,14 +176,16 @@ function App() {
           className="me-2"
           aria-label="Search"
         />
-        <Button variant="outline-success">Search</Button>
+        <Button className='me-2' variant="outline-success">Search</Button>
          {App()}
        </Form>
      </Navbar.Collapse>
+     {nftTable(null,null,6,null)}
    </Container>
   </Navbar>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
           </main>
         </div>
     )
+    
 }
