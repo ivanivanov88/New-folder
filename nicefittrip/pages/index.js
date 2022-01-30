@@ -78,6 +78,7 @@ function nftTable(tableName,cols,numrows,randomness)
     )
   multipleRows.push({oneRow});
   } 
+  return(
 <Table striped bordered hover size ="sm">  
 <thead>
   <tr>
@@ -87,9 +88,9 @@ function nftTable(tableName,cols,numrows,randomness)
   </tr>
 </thead>
 <tbody> 
-{multipleRows}
+{multipleRows.map(multipleRows => <div>{multipleRows.oneRow}</div>)}
 </tbody>
-  </Table>
+  </Table>)
 }
 function MydModalWithGrid(props) {
   return ( 
@@ -172,10 +173,11 @@ function App() {
          {App()}
        </Form>
      </Navbar.Collapse>   
-       {nftTable(null,null,6,null)}
+       
         </Container>
   </Navbar>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+          {nftTable(null,null,6,null)}
           </main>
         </div>
     )
