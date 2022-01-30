@@ -27,8 +27,6 @@ import {Table} from "react-bootstrap"
 // import torus from  './public/design/torus.png'
 // import bsc from  './public/design/bsc.jpg'
 // import clover from  './public/design/clover.svg'
-
-
 class WalletObject extends React.Component{
   constructor () {
     super();
@@ -37,8 +35,8 @@ class WalletObject extends React.Component{
       new Wallet(7,'Portis','/potris.png'),new Wallet(8,'Torus','/torus.png'),new Wallet(9,'Binance','/bsc.jpg'),new Wallet(10,'Clover','/clover.svg'),]
     }
   }
-  render(){const listItems = this.state.emps.map((item) => <Button key={item.id}><img src={item.href} alt="wallet image"></img>{item.name}</Button>);
-  return(  <ul>{listItems}</ul>)
+  render(){const listItems = this.state.emps.map((item) => <Button key={item.id}><img className='avatarImage' src={item.href} alt="wallet image"></img>{item.name}</Button>);
+  return(<ul>{listItems}</ul>)
 }
 }
 export default function Home() {
@@ -179,13 +177,12 @@ function App() {
         <Button className='me-2' variant="outline-success">Search</Button>
          {App()}
        </Form>
-     </Navbar.Collapse>
-     {nftTable(null,null,6,null)}
-   </Container>
+     </Navbar.Collapse>   
+       {nftTable(null,null,6,null)}
+        </Container>
   </Navbar>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
           </main>
         </div>
     )
-    
 }
