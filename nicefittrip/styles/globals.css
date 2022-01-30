@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+.modal-body ul{
+  display: flex;
+  flex-wrap: wrap;
+}

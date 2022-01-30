@@ -32,10 +32,10 @@ class WalletObject extends React.Component{
     super();
     this.state = {
       emps:[ new Wallet(1,'Metamask','/metamask.png'),new Wallet(2,'WalletConnect','/wallet-connect.svg'),new Wallet(3,'Keystone','/keystone.png'),new Wallet(4,'Lattice','/lattice.png'),new Wallet(5,'Coinbase Wallet','/coinbase.svg'),new Wallet(6,'Fortmatic','/fortmatic.png'),
-      new Wallet(7,'Portis','/potris.png'),new Wallet(8,'Torus','/torus.png'),new Wallet(9,'Binance','/bsc.jpg'),new Wallet(10,'Clover','/clover.svg'),]
+      new Wallet(7,'Portis','/portis.png'),new Wallet(8,'Torus','/torus.png'),new Wallet(9,'Binance','/bsc.jpg'),new Wallet(10,'Clover','/clover.svg'),]
     }
   }
-  render(){const listItems = this.state.emps.map((item) => <Button key={item.id}><img className='avatarImage' src={item.href} alt="wallet image"></img>{item.name}</Button>);
+  render(){const listItems = this.state.emps.map((item) => <Button className={styles.btnprimary} key={item.id}><img className={styles.avatarImage} src={item.href} alt="wallet image"></img><span className={styles.walletName}>{item.name}</span></Button>);
   return(<ul>{listItems}</ul>)
 }
 }
@@ -61,11 +61,7 @@ async function disconnect(){
 function WalletNumberOfRows(numrows){
   for (var i = 0; i < numrows; i++){
     return(
-    <Row>
-    <Col xs={12} md={6}>
      <WalletObject></WalletObject>
-    </Col>
-  </Row>
     )
   } 
 }
@@ -76,7 +72,7 @@ function nftTable(tableName,cols,numrows,randomness)
     let oneRow = (
     <Row>
     <Col xs={12} md={6}>
-     <WalletObject></WalletObject>
+     tableItems
     </Col>
   </Row>
     )
@@ -103,10 +99,8 @@ function MydModalWithGrid(props) {
           Select your wallet:
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="show-grid">
-        <Container>
+      <Modal.Body className={styles.FlexWrap}>
           {WalletNumberOfRows(5)}
-        </Container>
       </Modal.Body>
       <Modal.Footer>
           <Button onClick={connect}>

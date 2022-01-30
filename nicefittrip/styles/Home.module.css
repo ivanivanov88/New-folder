@@ -11,11 +11,23 @@
   justify-content: center;
   align-items: center;
 }
+.btnprimary{
+  color:black;
+  background-color:blanchedalmond;
+  border-color:olive;
+  width:10rem;
+  margin:0.2rem;
+  display: flex;
+  justify-content: space-between;
+}
 .avatarImage{
   height: auto;
-  max-height: 250px;
+  max-height: 2.2rem;
   width: auto;
-  max-width: 250px;
+  max-width: 2.2rem;
+}
+.walletName{
+margin:2px
 }
 .footer {
   display: flex;
