@@ -84,6 +84,7 @@ if(sex=="female"){
   <th>#</th>
   <th>Avatar</th>
   <th>Wallet Address</th>
+  <th>Bid</th>
   </tr>
 </thead>
 <tbody> 
