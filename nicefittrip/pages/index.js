@@ -17,16 +17,6 @@ import { Row } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 import { Wallet } from './api/hello'
 import {Table} from "react-bootstrap"
-// import Image from  '/next/image'
-// import walletconnect from  './public/design/wallet-connect.svg'
-// import metamask from  './public/design/metamask.png'
-// import lattice from  './public/design/lattice.jpg'
-// import coinbase from  './public/design/coinbase.jpg'
-// import formatic from  './public/design/fortmatic.jpg'
-// import potris from  './public/design/potris.jpg'
-// import torus from  './public/design/torus.png'
-// import bsc from  './public/design/bsc.jpg'
-// import clover from  './public/design/clover.svg'
 class WalletObject extends React.Component{
   constructor () {
     super();
@@ -65,9 +55,10 @@ function WalletNumberOfRows(numrows){
     )
   } 
 }
-function nftTable(tableName,cols,numrows,randomness)
-{
-  let multipleRows =[];
+function nftTable(tableName,cols,numrows,sex)
+{  let multipleRows =[];
+  if(sex=="male"){
+
   for (let i = 0; i < numrows; i++){
     let oneRow = (
     <Row>
@@ -78,6 +69,19 @@ function nftTable(tableName,cols,numrows,randomness)
     )
   multipleRows.push({oneRow});
   } 
+}
+if(sex=="female"){
+  for (let i = 0; i < numrows; i++){
+    let oneRow = (
+    <Row>
+    <Col xs={12} md={6}>
+     tableItems
+    </Col>
+  </Row>
+    )
+  multipleRows.push({oneRow});
+  } 
+}
   return(
 <Table striped bordered hover size ="sm">  
 <thead>
@@ -174,10 +178,18 @@ function App() {
        </Form>
      </Navbar.Collapse>   
        
-        </Container>
+    </Container>
   </Navbar>
+  <Row>
+  <Col>
+  {nftTable(null,null,6,"male")}
+  </Col>
+<Col>
+  {nftTable(null,null,6,"female")}
+  </Col>  
+  </Row>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
-          {nftTable(null,null,6,null)}
+         
           </main>
         </div>
     )
