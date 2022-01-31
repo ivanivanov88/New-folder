@@ -120,7 +120,7 @@ function App() {
   return (
     <>
       <Button variant="primary" onClick={() => setModalShow(true)}>
-        {active? <span>{account}</span>:"Choose a Wallet:"}
+        {active?<div className={styles.text}>{account}<span title={account} className={ styles.tooltiptext}>{account}</span></div>:"Choose a Wallet:"}
       </Button>
 
       <MydModalWithGrid show={modalShow} onHide={() => setModalShow(false)} />

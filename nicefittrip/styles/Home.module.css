@@ -1,7 +1,34 @@
 .container {
   padding: 0 0rem;
 }
+.text {
+  display: block;
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
+.text .tooltiptext {
+  visibility: hidden;
+  width: auto;
+  top: 100%;
+  right:0;
+  margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: small;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.text:hover .tooltiptext {
+  visibility: visible;
+}
 .main {
   min-height: 100vh;
   padding: 4rem 0;
@@ -20,6 +47,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .avatarImage{
   height: auto;
   max-height: 2.2rem;
