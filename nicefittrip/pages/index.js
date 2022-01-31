@@ -104,6 +104,7 @@ function MydModalWithGrid(props) {
           {WalletNumberOfRows(5)}
       </Modal.Body>
       <Modal.Footer>
+      {active? <Button onClick={disconnect}>Disconnect</Button>:""}
           <Button onClick={connect}>
                 Connect to wallet
               </Button>
@@ -119,7 +120,7 @@ function App() {
   return (
     <>
       <Button variant="primary" onClick={() => setModalShow(true)}>
-        Choose a Wallet:
+        {active? <span>{account}</span>:"Choose a Wallet:"}
       </Button>
 
       <MydModalWithGrid show={modalShow} onHide={() => setModalShow(false)} />
