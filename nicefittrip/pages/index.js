@@ -58,14 +58,13 @@ function WalletNumberOfRows(numrows){
 function nftTable(tableName,cols,numrows,sex)
 {  let multipleRows =[];
   if(sex=="male"){
-
   for (let i = 0; i < numrows; i++){
     let oneRow = (
-    <Row>
-    <Col xs={12} md={6}>
-     tableItems
-    </Col>
-  </Row>
+      <tr>
+        <td>
+    {i}
+    </td>
+  </tr>
     )
   multipleRows.push({oneRow});
   } 
@@ -73,11 +72,11 @@ function nftTable(tableName,cols,numrows,sex)
 if(sex=="female"){
   for (let i = 0; i < numrows; i++){
     let oneRow = (
-    <Row>
-    <Col xs={12} md={6}>
-     tableItems
-    </Col>
-  </Row>
+      <tr>
+        <td>
+     {i}
+     </td>
+  </tr>
     )
   multipleRows.push({oneRow});
   } 
