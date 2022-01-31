@@ -65,9 +65,9 @@ function WalletNumberOfRows(numrows){
     )
   } 
 }
-function nftTable(tableName,cols,numrows,randomness)
-{
-  let multipleRows =[];
+function nftTable(tableName,cols,numrows,sex)
+{let multipleRows =[];
+  if(sex == "male"){  
   for (let i = 0; i < numrows; i++){
     let oneRow = (
     <Row>
@@ -78,6 +78,19 @@ function nftTable(tableName,cols,numrows,randomness)
     )
   multipleRows.push({oneRow});
   } 
+}
+else if(sex == "female"){
+  for (let i = 0; i < numrows; i++){
+    let oneRow = (
+    <Row>
+    <Col xs={12} md={6}>
+     tableItems
+    </Col>
+  </Row>
+    )
+  multipleRows.push({oneRow});
+  } 
+}
   return(
 <Table striped bordered hover size ="sm">  
 <thead>
@@ -176,8 +189,16 @@ function App() {
        
         </Container>
   </Navbar>
+  <div>
+   <Col>
+  {nftTable(null,null,6,"male")}
+  </Col>
+  <Col>
+  {nftTable(null,null,6,"female")}
+  </Col>
+  </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
-          {nftTable(null,null,6,null)}
+          
           </main>
         </div>
     )
