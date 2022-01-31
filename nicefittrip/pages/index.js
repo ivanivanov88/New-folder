@@ -60,11 +60,9 @@ function nftTable(tableName,cols,numrows,sex)
   if(sex=="male"){
   for (let i = 0; i < numrows; i++){
     let oneRow = (
-      <tr>
         <td>
     {i}
     </td>
-  </tr>
     )
   multipleRows.push({oneRow});
   } 
@@ -72,11 +70,9 @@ function nftTable(tableName,cols,numrows,sex)
 if(sex=="female"){
   for (let i = 0; i < numrows; i++){
     let oneRow = (
-      <tr>
         <td>
      {i}
      </td>
-  </tr>
     )
   multipleRows.push({oneRow});
   } 
@@ -91,7 +87,7 @@ if(sex=="female"){
   </tr>
 </thead>
 <tbody> 
-{multipleRows.map(multipleRows => <div>{multipleRows.oneRow}</div>)}
+{multipleRows.map(multipleRows => <tr>{multipleRows.oneRow}</tr>)}
 </tbody>
   </Table>)
 }
