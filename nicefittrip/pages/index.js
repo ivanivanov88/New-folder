@@ -58,28 +58,26 @@ function WalletNumberOfRows(numrows){
 function nftTable(tableName,cols,numrows,sex)
 {  let multipleRows =[];
   if(sex=="male"){
-  for (let i = 0; i < numrows; i++){
-    let oneRow = (
-        <td>
-    {i}
-    </td>
-    )
+    let oneRow = 
+      {active} ? <><td></td><td></td><td>{account}</td><td></td></> : null
   multipleRows.push({oneRow});
+  for (let i = 0; i < numrows; i++){
+   oneRow = <><td>{i}</td><td></td><td></td><td></td></>
+   multipleRows.push({oneRow});
   } 
 }
 if(sex=="female"){
-  for (let i = 0; i < numrows; i++){
-    let oneRow = (
-        <td>
-     {i}
-     </td>
-    )
-  multipleRows.push({oneRow});
-  } 
+  let oneRow = 
+    {active} ? <><td></td><td></td><td>{account}</td><td></td></> : null
+multipleRows.push({oneRow});
+for (let i = 0; i < numrows; i++){
+ oneRow = <><td>{i}</td><td></td><td></td><td></td></>
+ multipleRows.push({oneRow});
+} 
 }
   return(
-<Table striped bordered hover size ="sm">  
-<thead>
+<Table className={styles.tblcontainer,styles.bdr} striped bordered hover size ="sm">  
+<thead className={styles.bggreen}>
   <tr>
   <th>#</th>
   <th>Avatar</th>

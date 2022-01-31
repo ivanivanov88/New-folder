@@ -17,4 +17,5 @@ a {
 .modal-body ul{
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }

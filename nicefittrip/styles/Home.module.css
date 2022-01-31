@@ -46,8 +46,11 @@
   margin:0.2rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
-
+.modal-body{
+  align-items: center;
+}
 .avatarImage{
   height: auto;
   max-height: 2.2rem;
@@ -109,7 +112,42 @@ margin:2px
   font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
+.tblcontainer {
+  width: 400px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
 
+.bggreen {
+    background: linear-gradient(270deg, #a3eeda, #68b1ec);
+    background-size: 400% 400%;
+    color:white;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+
+.bdr {
+  border-radius: 6px;
+  overflow: hidden;
+}
 .grid {
   display: flex;
   align-items: center;
