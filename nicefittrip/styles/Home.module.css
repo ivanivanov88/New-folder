@@ -8,7 +8,9 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
+.tableRow{
+  padding: 2rem;
+}
 .text .tooltiptext {
   visibility: hidden;
   width: auto;

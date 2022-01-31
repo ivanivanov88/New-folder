@@ -17,6 +17,14 @@ import { Row } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 import { Wallet } from './api/hello'
 import {Table} from "react-bootstrap"
+import { UnsupportedChainIdError } from '@web3-react/core'
+// ...
+
+function Component () {
+  const { error } = useWeb3React()
+  const isUnsupportedChainIdError = error instanceof UnsupportedChainIdError
+  // ...
+}
 class WalletObject extends React.Component{
   constructor () {
     super();
@@ -102,6 +110,7 @@ function MydModalWithGrid(props) {
           {WalletNumberOfRows(5)}
       </Modal.Body>
       <Modal.Footer>
+        {active? }
       {active? <Button onClick={disconnect}>Disconnect</Button>:""}
           <Button onClick={connect}>
                 Connect to wallet
@@ -175,7 +184,7 @@ function App() {
        
     </Container>
   </Navbar>
-  <Row>
+  <Row className={styles.tableRow}>
   <Col>
   {nftTable(null,null,6,"male")}
   </Col>
@@ -183,8 +192,7 @@ function App() {
   {nftTable(null,null,6,"female")}
   </Col>  
   </Row>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
-         
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>       
           </main>
         </div>
     )
