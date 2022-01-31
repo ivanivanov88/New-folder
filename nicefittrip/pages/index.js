@@ -110,7 +110,7 @@ function MydModalWithGrid(props) {
           {WalletNumberOfRows(5)}
       </Modal.Body>
       <Modal.Footer>
-        {active? }
+        {/* {active? } */}
       {active? <Button onClick={disconnect}>Disconnect</Button>:""}
           <Button onClick={connect}>
                 Connect to wallet
