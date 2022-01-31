@@ -169,7 +169,7 @@ function App() {
         <Form className="d-flex">
          <FormControl
           type="search"
-          placeholder="Search"
+          placeholder="Search by wallet address:"
           className="me-2"
           aria-label="Search"
         />
