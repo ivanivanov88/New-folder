@@ -63,6 +63,7 @@ function WalletNumberOfRows(numrows){
     )
   } 
 }
+//function to generate a table with rows and columns. Will be called twice with properties depending on the sex parameter
 function nftTable(tableName,cols,numrows,sex)
 {  let multipleRows =[];
   if(sex=="male"){
@@ -98,6 +99,7 @@ for (let i = 0; i < numrows; i++){
 </tbody>
   </Table>)
 }
+//function to generated the modal in which the wallets buttons are :
 function MydModalWithGrid(props) {
   return ( 
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
@@ -120,10 +122,9 @@ function MydModalWithGrid(props) {
     </Modal>
   );
 }
-
-function App() {
+//function to show and hide the modal  trough buttons clicks
+function ShowHideModal() {
   const [modalShow, setModalShow] = useState(false);
-
   return (
     <>
       <Button variant="primary" onClick={() => setModalShow(true)}>
@@ -178,7 +179,7 @@ function App() {
           aria-label="Search"
         />
         <Button className='me-2' variant="outline-success">Search</Button>
-         {App()}
+         {ShowHideModal()}
        </Form>
      </Navbar.Collapse>   
        
@@ -188,7 +189,9 @@ function App() {
   <Col>
   {nftTable(null,null,6,"male")}
   </Col>
-<Col>
+   
+   <Col>
+   {Component()}
   {nftTable(null,null,6,"female")}
   </Col>  
   </Row>
