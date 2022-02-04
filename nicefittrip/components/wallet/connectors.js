@@ -16,63 +16,64 @@ import { OneWalletConnector } from '@harmony-react/onewallet-connector'
 import { MathWalletConnector } from '@harmony-react/mathwallet-connector'
 
 
-// const POLLING_INTERVAL = 12000
-// const RPC_URLS: { [chainId: number]: string } = {
-//   1: process.env.RPC_URL_1 as string,
-//   4: process.env.RPC_URL_4 as string
-// }
+const POLLING_INTERVAL = 12000;
+const RPC_URLS = {
+  1: "https://mainnet.infura.io/v3/84842078b09946638c03157f83405213",
+  4: "https://rinkeby.infura.io/v3/84842078b09946638c03157f83405213"
+};
 
 //exporting different wallets to be used in index.js etc. currently have examples for some properties
 export const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] })
 
 export const network = new NetworkConnector({
-  urls: { 1: RPC_URLS[1], 4: RPC_URLS[4] },
-  defaultChainId: 1
-})
-
-export const walletconnect = new WalletConnectConnector({
-  rpc: { 1: RPC_URLS[1] },
-  bridge: 'https://bridge.walletconnect.org',
-  qrcode: true,
-  pollingInterval: POLLING_INTERVAL
-})
-//exporting different wallets to be used in index.js etc. currently have examples for some properties
-export const walletlink = new WalletLinkConnector({
-  url: RPC_URLS[1],
-  appName: 'NiceFitTrip'
-})
-
-export const ledger = new LedgerConnector({ chainId: 1, url: RPC_URLS[1], pollingInterval: POLLING_INTERVAL })
-
-export const trezor = new TrezorConnector({
-  chainId: 1,
-  url: RPC_URLS[1],
-  pollingInterval: POLLING_INTERVAL,
-  manifestEmail: 'dummy@abc.xyz',
-  manifestAppUrl: 'http://localhost:1234'
-})
-//exporting different wallets to be used in index.js etc. currently have examples for some properties
-export const frame = new FrameConnector({ supportedChainIds: [1] })
-
-export const authereum = new AuthereumConnector({ chainId: 42 })
-
-export const fortmatic = new FortmaticConnector({ apiKey: process.env.FORTMATIC_API_KEY, chainId: 4 })
-//exporting different wallets to be used in index.js etc. currently have examples for some properties
-export const magic = new MagicConnector({
-  apiKey: process.env.MAGIC_API_KEY,
-  chainId: 4,
-  email: 'hello@example.org'
-})
-
-export const portis = new PortisConnector({ dAppId: process.env.PORTIS_DAPP_ID , networks: [1, 100] })
-//exporting different wallets to be used in index.js etc. currently have examples for some properties
-export const squarelink = new SquarelinkConnector({
-  clientId: process.env.SQUARELINK_CLIENT_ID,
-  networks: [1, 100]
-})
-
-export const torus = new TorusConnector({ chainId: 1 })
-
-export const onewallet = new OneWalletConnector({ chainId: 1 })
-
-export const mathwallet = new MathWalletConnector({ chainId: 1 })
+    urls: { 1: RPC_URLS[1], 4: RPC_URLS[4] },
+    defaultChainId: 1,
+    pollingInterval: POLLING_INTERVAL
+  });
+  
+  export const walletconnect = new WalletConnectConnector({
+    rpc: { 1: RPC_URLS[1] },
+    bridge: "https://bridge.walletconnect.org",
+    qrcode: true,
+    pollingInterval: POLLING_INTERVAL
+  });
+  
+  export const walletlink = new WalletLinkConnector({
+    url: RPC_URLS[1],
+    appName: "web3-react example"
+  });
+  
+  export const ledger = new LedgerConnector({
+    chainId: 1,
+    url: RPC_URLS[1],
+    pollingInterval: POLLING_INTERVAL
+  });
+  
+  export const trezor = new TrezorConnector({
+    chainId: 1,
+    url: RPC_URLS[1],
+    pollingInterval: POLLING_INTERVAL,
+    manifestEmail: "dummy@abc.xyz",
+    manifestAppUrl: "https://8rg3h.csb.app/"
+  });
+  
+  export const frame = new FrameConnector({ supportedChainIds: [1] });
+  
+  export const fortmatic = new FortmaticConnector({
+    apiKey: "pk_live_F95FEECB1BE324B5",
+    chainId: 1
+  });
+  
+  export const portis = new PortisConnector({
+    dAppId: "211b48db-e8cc-4b68-82ad-bf781727ea9e",
+    networks: [1, 100]
+  });
+  
+  export const squarelink = new SquarelinkConnector({
+    clientId: "5f2a2233db82b06b24f9",
+    networks: [1, 100]
+  });
+  
+  export const torus = new TorusConnector({ chainId: 1 });
+  
+  export const authereum = new AuthereumConnector({ chainId: 42 });
