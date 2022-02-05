@@ -1,30 +1,29 @@
-
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import {injected} from "../components/wallet/connectors"
-import {useWeb3React} from "@web3-react/core"
-import { Container } from 'react-bootstrap'
-import { Nav } from 'react-bootstrap'
-import { NavDropdown } from 'react-bootstrap'
-import { Form } from 'react-bootstrap'
-import { FormControl } from 'react-bootstrap'
-import { Modal } from 'react-bootstrap'
-import { Button } from 'react-bootstrap'
-import { Navbar } from 'react-bootstrap'
-import React, { useEffect, useState } from "react";
-import { Row } from 'react-bootstrap'
-import { Col } from 'react-bootstrap'
-import { Wallet } from './api/hello'
-import {Table} from "react-bootstrap"
-import { UnsupportedChainIdError } from '@web3-react/core'
-// ...
-
-function Component () {
-  const { error } = useWeb3React()
-  const isUnsupportedChainIdError = error instanceof UnsupportedChainIdError
-  // ...
-}
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from '../styles/Home.module.css';
+import {injected,network,walletconnect,walletlink,ledger,trezor,frame,fortmatic,portis,squarelink,torus,authereum} from "../components/wallet/connectors";
+import {NoEthereumProviderError,UserRejectedRequestError as UserRejectedRequestErrorInjected} from "@web3-react/injected-connector";
+import {URI_AVAILABLE,UserRejectedRequestError as UserRejectedRequestErrorWalletConnect}from "@web3-react/walletconnect-connector";
+import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from "@web3-react/frame-connector";
+import { Web3Provider } from "@ethersproject/providers";
+import { formatEther } from "@ethersproject/units";
+import { Container } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
+import { NavDropdown } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Wallet } from './api/hello';
+import {Table} from "react-bootstrap";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import {Web3ReactProvider,useWeb3React,UnsupportedChainIdError} from "@web3-react/core";
+import { useEagerConnect, useInactiveListener } from "../components/wallet/hooks";
+import { Spinner } from "./Spinner";
 class WalletObject extends React.Component{
   constructor () {
     super();
@@ -37,9 +36,10 @@ class WalletObject extends React.Component{
   return(<ul>{listItems}</ul>)
 }
 }
+
 export default function Home() {
-const {active,account,library,connector,activate,deactivate}  =  useWeb3React()
-async function connect(){
+const {active,account,library,connector,activate,deactivate,chainId,error}  =  useWeb3React()
+async function connectInjected(){
   try {
     await activate(injected)
   }
@@ -47,14 +47,39 @@ async function connect(){
     console.log(ex)
   }
 }
-async function disconnect(){
+async function disconnectInjected(){
   try {
     deactivate(injected)
   }
   catch(ex){
     console.log(ex)
   }
-
+}
+function getErrorMessage(error) {
+  if (error instanceof NoEthereumProviderError) {
+    return "No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.";
+  } else if (error instanceof UnsupportedChainIdError) {
+    return "You're connected to an unsupported network.";
+  } else if (
+    error instanceof UserRejectedRequestErrorInjected ||
+    error instanceof UserRejectedRequestErrorWalletConnect ||
+    error instanceof UserRejectedRequestErrorFrame
+  ) {
+    return "Please authorize this website to access your Ethereum account.";
+  } else {
+    console.error(error);
+    return "An unknown error occurred. Check the console for more details.";
+  }
+}
+function CheckStateOfConnectedWallet(){
+  const[activatingConnector, setActivatingConnector] = React.useState();
+  React.useEffect(()=>{console.log('running')
+if(activatingConnector && activatingConnector === connector){
+  setActivatingConnector(undefined);
+}
+},[activatingConnector,connector]);
+const triedEager=useEagerConnect();
+useInactiveListener(!triedEager || !!activatingConnector);
 }
 function WalletNumberOfRows(numrows){
   for (var i = 0; i < numrows; i++){
@@ -113,8 +138,8 @@ function MydModalWithGrid(props) {
       </Modal.Body>
       <Modal.Footer>
         {/* {active? } */}
-      {active? <Button onClick={disconnect}>Disconnect</Button>:""}
-          <Button onClick={connect}>
+      {active? <Button onClick={disconnectInjected}>Disconnect</Button>:""}
+      <Button onClick={connectInjected}>
                 Connect to wallet
               </Button>
         <Button onClick={props.onHide}>Close</Button>
@@ -124,13 +149,12 @@ function MydModalWithGrid(props) {
 }
 //function to show and hide the modal  trough buttons clicks
 function ShowHideModal() {
-  const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
   return (
     <>
       <Button variant="primary" onClick={() => setModalShow(true)}>
         {active?<div className={styles.text}>{account}<span title={account} className={ styles.tooltiptext}>{account}</span></div>:"Choose a Wallet:"}
       </Button>
-
       <MydModalWithGrid show={modalShow} onHide={() => setModalShow(false)} />
     </>
   );
@@ -155,8 +179,7 @@ function ShowHideModal() {
                   <Nav
                     className="me-auto my-2 my-lg-0"
                     style={{ maxHeight: '100px' }}
-                    navbarScroll
-                  >
+                    navbarScroll>
                     <Nav.Link href="#action1">Home</Nav.Link>
                     <Nav.Link href="#action2">Map</Nav.Link>
                     <NavDropdown title="Link" id="navbarScrollingDropdown">
@@ -188,15 +211,15 @@ function ShowHideModal() {
   <Row className={styles.tableRow}>
   <Col>
   {nftTable(null,null,6,"male")}
-  </Col>
-   
+  </Col> 
    <Col>
-   {Component()}
   {nftTable(null,null,6,"female")}
   </Col>  
   </Row>
+  <Row></Row>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>       
           </main>
         </div>
     )
 }
+
