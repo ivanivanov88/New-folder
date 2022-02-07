@@ -11,6 +11,10 @@
 .tableRow{
   padding: 2rem;
 }
+.flexWrap {
+  display: flex;
+  flex-wrap: wrap;
+}
 .text .tooltiptext {
   visibility: hidden;
   width: auto;
@@ -27,7 +31,10 @@
   position: absolute;
   z-index: 1;
 }
-
+.btnprimaryNoPadding{
+  padding: 0!important;
+  width:15rem;
+}
 .text:hover .tooltiptext {
   visibility: visible;
 }
