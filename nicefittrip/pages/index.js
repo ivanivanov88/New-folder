@@ -109,7 +109,7 @@ export default function MyApp() {
           if (library && account && active) {
             let stale = false;
             console.log('fetching block number!!')
-            library.eth.getBlockNumber().then(blockNumber => {
+            library.getBlockNumber().then(blockNumber => {
                 if (!stale) {
                   setBlockNumber(blockNumber);
                 }
@@ -123,7 +123,7 @@ export default function MyApp() {
             const updateBlockNumber = blockNumber => {
               setBlockNumber(blockNumber);
             };
-            library.eth.on("block", updateBlockNumber);       
+            library.on("block", updateBlockNumber);       
             return () => {
               library.removeListener("block", updateBlockNumber);
               stale = true;
@@ -136,7 +136,7 @@ export default function MyApp() {
        console.log('running')
        if (library && account) {
          let stale = false;
-           library.ethBalance
+           library
            .getBalance(account)
            .then(balance => {
              if (!stale) {
