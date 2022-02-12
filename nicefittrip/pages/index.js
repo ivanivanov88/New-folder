@@ -362,6 +362,15 @@ function MydModalWithGrid(props) {
         })}
       </Modal.Body>
       <Modal.Footer>
+      <span>
+          {account === undefined
+            ? "..."
+            : account === null
+            ? "None"
+            : `${account.substring(0, 6)}...${account.substring(
+                account.length - 4
+              )}`}
+        </span>
       {active? <Button onClick={disconnectInjected}>Disconnect</Button>:""}
       <Button  onClick={connectInjected}>
                 Connect to wallet
@@ -442,7 +451,45 @@ function ShowHideModal() {
   {nftTable(null,null,6,"female")}
   </Col>  
   </Row>
-  <Row></Row>
+  <Row>
+  <span>
+          {ethBalance === undefined
+            ? "..."
+            : ethBalance === null
+            ? "Error"
+            : `Ξ${parseFloat(formatEther(ethBalance)).toPrecision(4)}`}
+        </span>
+        <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+      >
+        {(active || error) && (
+          <button
+            style={{
+              height: "3rem",
+              marginTop: "2rem",
+              borderRadius: "1rem",
+              borderColor: "red",
+              cursor: "pointer"
+            }}
+            onClick={() => {
+              deactivate();
+            }}
+          >
+            Deactivate
+          </button>
+        )}
+
+        {!!error && (
+          <h4 style={{ marginTop: "1rem", marginBottom: "0" }}>
+            {getErrorMessage(error)}
+          </h4>
+        )}
+      </div>
+  </Row>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>       
           </main>
         </div>
