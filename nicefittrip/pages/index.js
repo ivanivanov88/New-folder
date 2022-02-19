@@ -304,19 +304,28 @@ function MydModalWithGrid(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className={styles.FlexWrap}>
-          {active? ShowParameters(active) : WalletNumberOfRows(5) }
+          {active? ShowParameters(active) : 
+          <h4 style={{ marginTop: "1rem", marginBottom: "0" }}>
+            {getErrorMessage(error)}
+          </h4>} 
           {Object.keys(connectorsByName).map(name => {
           const currentConnector = connectorsByName[name];
           const activating = currentConnector === activatingConnector;
           const connected = currentConnector === connector;
+          const imaged = ({ name }) => (
+            <img
+              style={{ width: '48px', height: '48px', position: 'absolute' }}
+              src={name == injected ? "/metamask.png"  : ''}
+            />
+          );
           const disabled =
             !triedEager || !!activatingConnector || connected || !!error;
-
           return (
             <button
               style={{
                 height: "3rem",
                 borderRadius: "1rem",
+                backgroundImage:"/metamask.png",
                 borderColor: activating
                   ? "orange"
                   : connected
@@ -356,6 +365,7 @@ function MydModalWithGrid(props) {
                   </span>
                 )}
               </div>
+              {imaged}
               {name}
             </button>
           );
