@@ -24,30 +24,42 @@ import * as ReactDOM from "react-dom";
 import {Web3ReactProvider,useWeb3React,UnsupportedChainIdError} from "@web3-react/core";
 import { useEagerConnect, useInactiveListener } from "../components/wallet/hooks";
 import { Spinner } from "./Spinner";
-const connectorsByName = {
-  Injected: injected,
-  Network: network,
-  WalletConnect: walletconnect,
-  WalletLink: walletlink,
-  Ledger: ledger,
-  Trezor: trezor,
-  Frame: frame,
-  Fortmatic: fortmatic,
-  Portis: portis,
-  Squarelink: squarelink,
-  Torus: torus,
-  Authereum: authereum
-};
-class WalletObject extends React.Component{
-  constructor () {
-    super();
-    this.state = {
-      emps:[ new Wallet(1,'Metamask','/metamask.png'),new Wallet(2,'WalletConnect','/wallet-connect.svg'),new Wallet(3,'Keystone','/keystone.png'),new Wallet(4,'Lattice','/lattice.png'),new Wallet(5,'Coinbase Wallet','/coinbase.svg'),new Wallet(6,'Fortmatic','/fortmatic.png'),
-      new Wallet(7,'Portis','/portis.png'),new Wallet(8,'Torus','/torus.png'),new Wallet(9,'Binance','/bsc.jpg'),new Wallet(10,'Clover','/clover.svg'),]
-    }
-  }
-  render(){const listItems = this.state.emps.map((item) => <Button className={styles.btnprimary} key={item.id}><img className={styles.avatarImage} src={item.href} alt="wallet image"></img><span className={styles.walletName}>{item.name}</span></Button>);
-  return(<div className={styles.flexWrap}>{listItems}</div>)}
+const connectorsByName = [
+  {Injected: injected, img:'/metamask.png'},
+  {Network: network, img:'/wallet-connect.svg'},
+  {WalletConnect: walletconnect,img:'/keystone.png'},
+  {WalletLink: walletlink,img:''},
+  {Ledger: ledger,img: '/lattice.png'},
+  {Trezor: trezor, img:'/coinbase.svg'},
+  {Frame: frame,img:'/bsc.jpg'},
+  {Fortmatic: fortmatic,img: ''},
+  {Portis: portis,img:''},
+  {Squarelink: squarelink,img:''},
+  {Torus: torus, img: '/torus.png'},
+  {Authereum: authereum,img:''}
+];
+// class WalletObject extends React.Component{
+//   constructor () {
+//     super();
+//     this.state = {
+//       emps:[ new Wallet(1,'Metamask','/metamask.png'),new Wallet(2,'WalletConnect','/wallet-connect.svg'),new Wallet(3,'Keystone','/keystone.png'),new Wallet(4,'Lattice','/lattice.png'),new Wallet(5,'Coinbase Wallet','/coinbase.svg'),new Wallet(6,'Fortmatic','/fortmatic.png'),
+//       new Wallet(7,'Portis','/portis.png'),new Wallet(8,'Torus','/torus.png'),new Wallet(9,'Binance','/bsc.jpg'),new Wallet(10,'Clover','/clover.svg'),]
+//     }
+//   }
+//   render(){const listItems = this.state.emps.map((item) => <Button className={styles.btnprimary} key={item.id}><img className={styles.avatarImage} src={item.href} alt="wallet image"></img><span className={styles.walletName}>{item.name}</span></Button>);
+//   return(<div className={styles.flexWrap}>{listItems}</div>)}
+// }
+const buttonImages = {
+  metamask : '/metamask.png',
+  walletconnect : '/wallet-connect.svg',
+  keystone : '/keystone.png',
+  lattice : '/lattice.png',
+  coinbase : '/coinbase.svg',
+  fortmatic:'/fortmatic.png',
+  portis :'/portis.png',
+  torus : '/torus.png',
+  binance: '/bsc.jpg',
+  clover : '/clover.svg'
 }
 // function getLibrary(provider) {
 //   const library = new Web3Provider(provider);
@@ -312,12 +324,12 @@ function MydModalWithGrid(props) {
           const currentConnector = connectorsByName[name];
           const activating = currentConnector === activatingConnector;
           const connected = currentConnector === connector;
-          const imaged = ({ name }) => (
-            <img
-              style={{ width: '48px', height: '48px', position: 'absolute' }}
-              src={name == injected ? "/metamask.png"  : ''}
-            />
-          );
+          // const imaged = ({ name }) => (
+          //   <img
+          //     style={{ width: '48px', height: '48px', position: 'absolute' }}
+          //     src={name == injected ? "/metamask.png"  : ''}
+          //   />
+          // );
           const disabled =
             !triedEager || !!activatingConnector || connected || !!error;
           return (
@@ -325,7 +337,6 @@ function MydModalWithGrid(props) {
               style={{
                 height: "3rem",
                 borderRadius: "1rem",
-                backgroundImage:"/metamask.png",
                 borderColor: activating
                   ? "orange"
                   : connected
@@ -365,7 +376,6 @@ function MydModalWithGrid(props) {
                   </span>
                 )}
               </div>
-              {imaged}
               {name}
             </button>
           );
