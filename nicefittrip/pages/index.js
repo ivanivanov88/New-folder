@@ -25,18 +25,18 @@ import {Web3ReactProvider,useWeb3React,UnsupportedChainIdError} from "@web3-reac
 import { useEagerConnect, useInactiveListener } from "../components/wallet/hooks";
 import { Spinner } from "./Spinner";
 const connectorsByName = [
-  {Injected: injected, img:'/metamask.png'},
-  {Network: network, img:'/wallet-connect.svg'},
-  {WalletConnect: walletconnect,img:'/keystone.png'},
-  {WalletLink: walletlink,img:''},
-  {Ledger: ledger,img: '/lattice.png'},
-  {Trezor: trezor, img:'/coinbase.svg'},
-  {Frame: frame,img:'/bsc.jpg'},
-  {Fortmatic: fortmatic,img: ''},
-  {Portis: portis,img:''},
-  {Squarelink: squarelink,img:''},
-  {Torus: torus, img: '/torus.png'},
-  {Authereum: authereum,img:''}
+  {name : 'Injected', connector : injected, img:'/metamask.png'},
+  {name : 'Network', connector : network, img:'/wallet-connect.svg'},
+  {name : 'WalletConnect', connector : walletconnect, img:'/keystone.png'},
+  {name : 'WalletLink', connector : walletlink,img:''},
+  {name : 'Ledger', connector : ledger , img: '/lattice.png'},
+  {name : 'Trezor', connector : trezor, img:'/coinbase.svg'},
+  {name : 'Frame', connector : frame, img:'/bsc.jpg'},
+  {name : 'Fortmatic', connector: fortmatic, img: ''},
+  {name : 'Portis', connector : portis,img:''},
+  {name : 'Squarelink', connector : squarelink,img:''},
+  {name : 'Torus', connector : torus, img: '/torus.png'},
+  {name : 'Authereum', connector : authereum, img:''}
 ];
 // class WalletObject extends React.Component{
 //   constructor () {
@@ -49,18 +49,6 @@ const connectorsByName = [
 //   render(){const listItems = this.state.emps.map((item) => <Button className={styles.btnprimary} key={item.id}><img className={styles.avatarImage} src={item.href} alt="wallet image"></img><span className={styles.walletName}>{item.name}</span></Button>);
 //   return(<div className={styles.flexWrap}>{listItems}</div>)}
 // }
-const buttonImages = {
-  metamask : '/metamask.png',
-  walletconnect : '/wallet-connect.svg',
-  keystone : '/keystone.png',
-  lattice : '/lattice.png',
-  coinbase : '/coinbase.svg',
-  fortmatic:'/fortmatic.png',
-  portis :'/portis.png',
-  torus : '/torus.png',
-  binance: '/bsc.jpg',
-  clover : '/clover.svg'
-}
 // function getLibrary(provider) {
 //   const library = new Web3Provider(provider);
 //   library.pollingInterval = 8000;
@@ -320,8 +308,9 @@ function MydModalWithGrid(props) {
           <h4 style={{ marginTop: "1rem", marginBottom: "0" }}>
             {getErrorMessage(error)}
           </h4>} 
-          {Object.keys(connectorsByName).map(name => {
-          const currentConnector = connectorsByName[name];
+          {connectorsByName.map(name => {
+          const currentConnector = connectorsByName.name;
+          const currentImgOfConnect = connectorsByName.img;
           const activating = currentConnector === activatingConnector;
           const connected = currentConnector === connector;
           // const imaged = ({ name }) => (
@@ -349,7 +338,7 @@ function MydModalWithGrid(props) {
               key={name}
               onClick={() => {
                 setActivatingConnector(currentConnector);
-                activate(connectorsByName[name]);
+                activate(connectorsByName.name);
               }}
             >
               <div
