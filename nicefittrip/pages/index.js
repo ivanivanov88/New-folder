@@ -24,44 +24,7 @@ import * as ReactDOM from "react-dom";
 import {Web3ReactProvider,useWeb3React,UnsupportedChainIdError} from "@web3-react/core";
 import { useEagerConnect, useInactiveListener } from "../components/wallet/hooks";
 import { Spinner } from "./Spinner";
-const connectorsByName = [
-  {name : 'Injected', connector : injected, img:'/metamask.png'},
-  {name : 'Network', connector : network, img:'/wallet-connect.svg'},
-  {name : 'WalletConnect', connector : walletconnect, img:'/keystone.png'},
-  {name : 'WalletLink', connector : walletlink,img:''},
-  {name : 'Ledger', connector : ledger , img: '/lattice.png'},
-  {name : 'Trezor', connector : trezor, img:'/coinbase.svg'},
-  {name : 'Frame', connector : frame, img:'/bsc.jpg'},
-  {name : 'Fortmatic', connector: fortmatic, img: ''},
-  {name : 'Portis', connector : portis,img:''},
-  {name : 'Squarelink', connector : squarelink,img:''},
-  {name : 'Torus', connector : torus, img: '/torus.png'},
-  {name : 'Authereum', connector : authereum, img:''}
-];
-// class WalletObject extends React.Component{
-//   constructor () {
-//     super();
-//     this.state = {
-//       emps:[ new Wallet(1,'Metamask','/metamask.png'),new Wallet(2,'WalletConnect','/wallet-connect.svg'),new Wallet(3,'Keystone','/keystone.png'),new Wallet(4,'Lattice','/lattice.png'),new Wallet(5,'Coinbase Wallet','/coinbase.svg'),new Wallet(6,'Fortmatic','/fortmatic.png'),
-//       new Wallet(7,'Portis','/portis.png'),new Wallet(8,'Torus','/torus.png'),new Wallet(9,'Binance','/bsc.jpg'),new Wallet(10,'Clover','/clover.svg'),]
-//     }
-//   }
-//   render(){const listItems = this.state.emps.map((item) => <Button className={styles.btnprimary} key={item.id}><img className={styles.avatarImage} src={item.href} alt="wallet image"></img><span className={styles.walletName}>{item.name}</span></Button>);
-//   return(<div className={styles.flexWrap}>{listItems}</div>)}
-// }
-// function getLibrary(provider) {
-//   const library = new Web3Provider(provider);
-//   library.pollingInterval = 8000;
-//   return library;
-// }
 
-// function App() {
-//   return (
-//     <Web3ReactProvider getLibrary={getLibrary}>
-//       <Home />
-//     </Web3ReactProvider>
-//   );
-// }
 function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {
     return "No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.";
@@ -78,6 +41,20 @@ function getErrorMessage(error) {
     return "An unknown error occurred. Check the console for more details.";
   }
 }
+const connectorsByName = [
+  {name : 'Injected', connector : injected, img:'/metamask.png'},
+  {name : 'Network', connector : network, img:'/wallet-connect.svg'},
+  {name : 'WalletConnect', connector : walletconnect, img:'/keystone.png'},
+  {name : 'WalletLink', connector : walletlink,img:''},
+  {name : 'Ledger', connector : ledger , img: '/lattice.png'},
+  {name : 'Trezor', connector : trezor, img:'/coinbase.svg'},
+  {name : 'Frame', connector : frame, img:'/bsc.jpg'},
+  {name : 'Fortmatic', connector: fortmatic, img: ''},
+  {name : 'Portis', connector : portis,img:''},
+  {name : 'Squarelink', connector : squarelink,img:''},
+  {name : 'Torus', connector : torus, img: '/torus.png'},
+  {name : 'Authereum', connector : authereum, img:''}
+];
 export default function MyApp() {
       const context = useWeb3React();
          const {
@@ -279,23 +256,79 @@ export default function MyApp() {
           multipleRows.push({oneRow});
          } 
        }
- return(
-<Table className={styles.tblcontainer,styles.bdr} striped bordered hover size ="sm">  
-<thead className={styles.bggreen}>
-  <tr>
-  <th>#</th>
-  <th>Avatar</th>
-  <th>Wallet Address</th>
-  <th>Bid</th>
-  </tr>
-</thead>
-<tbody> 
-{multipleRows.map(multipleRows => <tr>{multipleRows.oneRow}</tr>)}
-</tbody>
-  </Table>)
-}
+    return(
+           <Table className={styles.tblcontainer , styles.bdr} striped bordered hover size ="sm">  
+           <thead className={styles.bggreen}>
+             <tr>
+             <th>#</th>
+             <th>Avatar</th>
+             <th>Wallet Address</th>
+             <th>Bid</th>
+             </tr>
+           </thead>
+           <tbody> 
+           {multipleRows.map(multipleRows => <tr>{multipleRows.oneRow}</tr>)}
+           </tbody>
+          </Table>)
+      }
+      function ButtonToConnect(buttonProps){
+        const currentButton =( <ul>{buttonProps.connectorsByName.map((connector) => {                
+        const activating = currentConnector === activatingConnector;
+        const connected = currentConnector === connector;    
+        const disabled =
+          !triedEager || !!activatingConnector || connected || !!error;} 
+           )}</ul> );     
+        return (
+          <button
+            style={{
+              height: "3rem",
+              borderRadius: "1rem",
+              borderColor: activating
+                ? "orange"
+                : connected
+                ? "green"
+                : "unset",
+              cursor: disabled ? "unset" : "pointer",
+              position: "relative"
+            }}
+            disabled={disabled}
+            key={connector.name}
+            onClick={() => {
+              setActivatingConnector(currentConnector);
+              activate(connector.name);
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: "0",
+                left: "0",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                color: "black",
+                margin: "0 0 0 1rem"
+              }}
+            >
+              {activating && (
+                <Spinner
+                  color={"black"}
+                  style={{ height: "25%", marginLeft: "-1rem" }}
+                />
+              )}
+              {connected && (
+                <span role="img" aria-label="check">
+                  ✅
+                </span>
+              )}
+            </div>
+            {connector.name}
+          </button>
+        );
+      }
 //function to generated the modal in which the wallets buttons are :
-function MydModalWithGrid(props) {
+function MydModalWithGrid(props) { 
+  // ButtonToConnect(connectorsByName);
   return ( 
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
       <Modal.Header closeButton>
@@ -308,67 +341,7 @@ function MydModalWithGrid(props) {
           <h4 style={{ marginTop: "1rem", marginBottom: "0" }}>
             {getErrorMessage(error)}
           </h4>} 
-          {connectorsByName.map(name => {
-          const currentConnector = connectorsByName.name;
-          const currentImgOfConnect = connectorsByName.img;
-          const activating = currentConnector === activatingConnector;
-          const connected = currentConnector === connector;
-          // const imaged = ({ name }) => (
-          //   <img
-          //     style={{ width: '48px', height: '48px', position: 'absolute' }}
-          //     src={name == injected ? "/metamask.png"  : ''}
-          //   />
-          // );
-          const disabled =
-            !triedEager || !!activatingConnector || connected || !!error;
-          return (
-            <button
-              style={{
-                height: "3rem",
-                borderRadius: "1rem",
-                borderColor: activating
-                  ? "orange"
-                  : connected
-                  ? "green"
-                  : "unset",
-                cursor: disabled ? "unset" : "pointer",
-                position: "relative"
-              }}
-              disabled={disabled}
-              key={name}
-              onClick={() => {
-                setActivatingConnector(currentConnector);
-                activate(connectorsByName.name);
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: "0",
-                  left: "0",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  color: "black",
-                  margin: "0 0 0 1rem"
-                }}
-              >
-                {activating && (
-                  <Spinner
-                    color={"black"}
-                    style={{ height: "25%", marginLeft: "-1rem" }}
-                  />
-                )}
-                {connected && (
-                  <span role="img" aria-label="check">
-                    ✅
-                  </span>
-                )}
-              </div>
-              {name}
-            </button>
-          );
-        })}
+           
       </Modal.Body>
       <Modal.Footer>
       <span>
@@ -388,19 +361,19 @@ function MydModalWithGrid(props) {
       </Modal.Footer>
     </Modal>
   );
-}
+            }
 //function to show and hide the modal  trough buttons clicks
-function ShowHideModal() {
-  const [modalShow, setModalShow] = React.useState(false);
-  return (
-    <>
-      <Button variant="primary" className={styles.btnprimaryNoPadding} onClick={() => setModalShow(true)}>
-        {active?<div className={styles.text}>{account}<span title={account} className={ styles.tooltiptext}>{account}</span></div>:"Choose a Wallet:"}
-      </Button>
-      <MydModalWithGrid show={modalShow} onHide={() => setModalShow(false)} />
-    </>
-  );
-}
+  function ShowHideModal() {
+    const [modalShow, setModalShow] = React.useState(false);
+    return (
+      <>
+        <Button variant="primary" className={styles.btnprimaryNoPadding} onClick={() => setModalShow(true)}>
+          {active?<div className={styles.text}>{account}<span title={account} className={ styles.tooltiptext}>{account}</span></div>:"Choose a Wallet:"}
+        </Button>
+        <MydModalWithGrid show={modalShow} onHide={() => setModalShow(false)} />
+      </>
+    );
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -462,6 +435,7 @@ function ShowHideModal() {
   </Row>
   <Row>
   <span>
+  <ButtonToConnect buttonProps = {connectorsByName} />
           {ethBalance === undefined
             ? "..."
             : ethBalance === null
