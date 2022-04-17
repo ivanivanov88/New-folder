@@ -272,60 +272,59 @@ export default function MyApp() {
           </Table>)
       }
       function ButtonToConnect(buttonProps){
-        const currentButton =( <ul>{buttonProps.connectorsByName.map((connector) => {                
-        const activating = currentConnector === activatingConnector;
-        const connected = currentConnector === connector;    
+        const currentButton = buttonProps.buttonProps.map((connector) => {     
+        const currentButtonName = connector.connector ;            
+        const activating = currentButtonName === activatingConnector;
+        const connected = currentButtonName === connector;    
         const disabled =
-          !triedEager || !!activatingConnector || connected || !!error;} 
-           )}</ul> );     
-        return (
-          <button
-            style={{
-              height: "3rem",
-              borderRadius: "1rem",
-              borderColor: activating
-                ? "orange"
-                : connected
-                ? "green"
-                : "unset",
-              cursor: disabled ? "unset" : "pointer",
-              position: "relative"
-            }}
-            disabled={disabled}
-            key={connector.name}
-            onClick={() => {
-              setActivatingConnector(currentConnector);
-              activate(connector.name);
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: "0",
-                left: "0",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                color: "black",
-                margin: "0 0 0 1rem"
-              }}
-            >
-              {activating && (
-                <Spinner
-                  color={"black"}
-                  style={{ height: "25%", marginLeft: "-1rem" }}
-                />
-              )}
-              {connected && (
-                <span role="img" aria-label="check">
-                  ✅
-                </span>
-              )}
-            </div>
-            {connector.name}
-          </button>
-        );
-      }
+        !triedEager || !!activatingConnector || connected || !!error;                                 
+        return (<button
+        style={{
+          height: "3rem",
+          borderRadius: "1rem",
+          borderColor: activating
+            ? "orange"
+            : connected
+            ? "green"
+            : "unset",
+          cursor: disabled ? "unset" : "pointer",
+          position: "relative"
+        }}
+        disabled={disabled}
+        key={connector.name}
+        onClick={() => {
+          setActivatingConnector(currentButtonName);
+          activate(connector.name);
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: "0",
+            left: "0",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            color: "black",
+            margin: "0 0 0 1rem"
+          }}
+        >
+          {activating && (
+            <Spinner
+              color={"black"}
+              style={{ height: "25%", marginLeft: "-1rem" }}
+            />
+          )}
+          {connected && (
+            <span role="img" aria-label="check">
+              ✅
+            </span>
+          )}
+        </div>
+        {connector.name}
+      </button>);
+     })
+    return ({currentButton})}
 //function to generated the modal in which the wallets buttons are :
 function MydModalWithGrid(props) { 
   // ButtonToConnect(connectorsByName);
