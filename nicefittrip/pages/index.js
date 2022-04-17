@@ -294,7 +294,7 @@ export default function MyApp() {
         key={connector.name}
         onClick={() => {
           setActivatingConnector(currentButtonName);
-          activate(connector.name);
+          activate(connector.connector);
         }}
       >
         <div
