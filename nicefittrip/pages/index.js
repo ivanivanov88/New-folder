@@ -324,7 +324,8 @@ export default function MyApp() {
         {connector.name}
       </button>);
      })
-    return ({currentButton})}
+    return (currentButton.map((button) =>(button)))
+    }
 //function to generated the modal in which the wallets buttons are :
 function MydModalWithGrid(props) { 
   // ButtonToConnect(connectorsByName);
@@ -340,7 +341,7 @@ function MydModalWithGrid(props) {
           <h4 style={{ marginTop: "1rem", marginBottom: "0" }}>
             {getErrorMessage(error)}
           </h4>} 
-           
+          <ButtonToConnect buttonProps = {connectorsByName} />
       </Modal.Body>
       <Modal.Footer>
       <span>
@@ -434,7 +435,6 @@ function MydModalWithGrid(props) {
   </Row>
   <Row>
   <span>
-  <ButtonToConnect buttonProps = {connectorsByName} />
           {ethBalance === undefined
             ? "..."
             : ethBalance === null
