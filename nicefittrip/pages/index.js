@@ -288,15 +288,17 @@ export default function MyApp() {
             ? "green"
             : "unset",
           cursor: disabled ? "unset" : "pointer",
-          position: "relative"
+          position: "relative",
+          
         }}
         disabled={disabled}
         key={connector.name}
         onClick={() => {
           setActivatingConnector(currentButtonName);
           activate(connector.connector);
-        }}
+        }}        
       >
+        <img src={ connector.img}></img>
         <div
           style={{
             position: "absolute",
