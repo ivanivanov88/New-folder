@@ -298,8 +298,8 @@ export default function MyApp() {
           activate(connector.connector);
         }}        
       >
-        <img src={ connector.img}></img>
-        <div
+        <img height = "200px" width="200px" src={ connector.img}></img>
+        <div 
           style={{
             position: "absolute",
             top: "0",
