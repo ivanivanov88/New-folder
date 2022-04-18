@@ -43,17 +43,15 @@ function getErrorMessage(error) {
 }
 const connectorsByName = [
   {name : 'Injected', connector : injected, img:'/metamask.png'},
-  {name : 'Network', connector : network, img:'/wallet-connect.svg'},
-  {name : 'WalletConnect', connector : walletconnect, img:'/keystone.png'},
-  {name : 'WalletLink', connector : walletlink,img:''},
+  {name : 'WalletConnect', connector : walletconnect, img :'/wallet-connect.svg'},
   {name : 'Ledger', connector : ledger , img: '/lattice.png'},
   {name : 'Trezor', connector : trezor, img:'/coinbase.svg'},
   {name : 'Frame', connector : frame, img:'/bsc.jpg'},
-  {name : 'Fortmatic', connector: fortmatic, img: ''},
-  {name : 'Portis', connector : portis,img:''},
+  {name : 'Fortmatic', connector: fortmatic, img: '/fortmatic.png'},
+  {name : 'Portis', connector : portis,img:'/portis.png'},
   {name : 'Squarelink', connector : squarelink,img:''},
   {name : 'Torus', connector : torus, img: '/torus.png'},
-  {name : 'Authereum', connector : authereum, img:''}
+  {name : 'Authereum', connector : authereum, img:'/autherium.png'}
 ];
 export default function MyApp() {
       const context = useWeb3React();
@@ -298,7 +296,7 @@ export default function MyApp() {
           activate(connector.connector);
         }}        
       >
-        <img height = "200px" width="200px" src={ connector.img}></img>
+        <img height = "25px" width="25px" src={ connector.img}></img>
         <div 
           style={{
             position: "absolute",
