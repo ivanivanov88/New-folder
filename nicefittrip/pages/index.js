@@ -24,7 +24,7 @@ import * as ReactDOM from "react-dom";
 import {Web3ReactProvider,useWeb3React,UnsupportedChainIdError} from "@web3-react/core";
 import { useEagerConnect, useInactiveListener } from "../components/wallet/hooks";
 import { Spinner } from "./Spinner";
-
+const tableStyle = styles.tblcontainer + styles.bdr
 function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {
     return "No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.";
@@ -255,7 +255,7 @@ export default function MyApp() {
          } 
        }
     return(
-           <Table className={styles.tblcontainer , styles.bdr} striped bordered hover size ="sm">  
+           <Table className={tableStyle} striped bordered hover size ="sm">  
            <thead className={styles.bggreen}>
              <tr>
              <th>#</th>
